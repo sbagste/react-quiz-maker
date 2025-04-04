@@ -4,3 +4,23 @@
   margin-right: 50px;
   margin-left: 50px;
 }
+
+.btn-answer {
+  border-color: lightgreen;
+  background-color: black;
+  color: lightgreen;
+  font-size: 0.8rem;
+  white-space: wrap;
+}
+
+.btn-answer:hover {
+  border-color: lightgreen;
+  background-color: green;
+  color: white;
+}
+
+.btn-is-selected {
+  border-color: lightgreen;
+  background-color: green;
+  color: white;
+}
