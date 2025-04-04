@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
-import { fetchAllCategories } from './service/category-service';
-import { fetchTriviaByCategoryAndDifficultyAndAmount } from './service/open-trivia-service';
+import { useEffect, useState } from 'react';
+import { fetchAllCategories } from '@service/category-service';
+import { fetchTriviaByCategoryAndDifficultyAndAmount } from '@service/open-trivia-service';
 
 const DIFFICULTY_OPTIONS = [
   {id: 1, value: 'easy', name: 'Easy'},
@@ -8,7 +8,7 @@ const DIFFICULTY_OPTIONS = [
   {id: 3, value: 'hard', name: 'Hard'}
 ];
 
-function App() {
+export default function Quiz() {
   const [categoryOptions, setCategoryOptions] = useState([]);
   const [triviaQuestions, setTriviaQuestions] = useState([]);
 
@@ -103,5 +103,3 @@ function App() {
     </main>
   );
 }
-
-export default App;
