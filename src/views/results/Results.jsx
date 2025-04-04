@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router';
 import PropTypes from 'prop-types';
+import { decode } from 'html-entities';
 
 function Question({ triviaQuestion }) {
   return (
     <div className='container'>
-      <p>{triviaQuestion.question}</p>
+      <p>{decode(triviaQuestion.question)}</p>
       <div>
         {
           triviaQuestion.answers.map(answer => {
@@ -13,7 +14,7 @@ function Question({ triviaQuestion }) {
               key={answer.id}
               type='button'
               className={`btn-answer btn-no-hover ${answer.isCorrect ? 'btn-is-selected' : answer.isSelected && !answer.isCorrect ? 'btn-is-wrong' : ''}`}
-              value={answer.value}
+              value={decode(answer.value)}
             />;
           })
         }

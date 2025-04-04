@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router';
+import { decode } from 'html-entities';
 
 function Question({ triviaQuestion, setTriviaQuestions }) {
   function handleOnClick(questionId, answerId, isSelected) {
@@ -14,7 +15,7 @@ function Question({ triviaQuestion, setTriviaQuestions }) {
 
   return (
     <div className='container'>
-      <p>{triviaQuestion.question}</p>
+      <p>{decode(triviaQuestion.question)}</p>
       <div>
         {
           triviaQuestion.answers.map(answer => {
@@ -22,7 +23,7 @@ function Question({ triviaQuestion, setTriviaQuestions }) {
               key={answer.id}
               type='button'
               className={`btn-answer ${answer.isSelected ? 'btn-is-selected' : ''}`}
-              value={answer.value}
+              value={decode(answer.value)}
               onClick={() => handleOnClick(triviaQuestion.id, answer.id, !answer.isSelected)}
             />;
           })
