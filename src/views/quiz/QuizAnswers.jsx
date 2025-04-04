@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router';
 
 function Question({ triviaQuestion, setTriviaQuestions }) {
   function handleOnClick(questionId, answerId, isSelected) {
@@ -37,6 +38,8 @@ Question.propTypes = {
 };
 
 export default function QuizAnswers({ triviaQuestions, setTriviaQuestions }) {
+  const navigate = useNavigate();
+
   function allQuestionsAnswered() {
     const areAllQuestionsAnswered = !triviaQuestions.some(question => {
       return !question.answers.some(answer => answer.isSelected);
@@ -44,14 +47,14 @@ export default function QuizAnswers({ triviaQuestions, setTriviaQuestions }) {
     return areAllQuestionsAnswered;
   };
 
-  function handleSubmitAnswers() {
-    console.log('Submitting');
+  function handleOnSubmit() {
+    navigate('/results', { state: triviaQuestions });
   };
 
   if (triviaQuestions.length === 0) return null;
 
   return (
-    <form onSubmit={handleSubmitAnswers}>
+    <form onSubmit={handleOnSubmit}>
       {
         triviaQuestions.map(triviaQuestion => <Question key={triviaQuestion.id} triviaQuestion={triviaQuestion} setTriviaQuestions={setTriviaQuestions} />)
       }

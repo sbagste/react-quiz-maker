@@ -5,6 +5,14 @@
   margin-left: 50px;
 }
 
+.full-width {
+  width: 100%;
+}
+
+.btn-no-hover {
+  pointer-events: none;
+}
+
 .btn-answer {
   border-color: lightgreen;
   background-color: black;
@@ -21,6 +29,27 @@
 
 .btn-is-selected {
   border-color: lightgreen;
+  background-color: green;
+  color: white;
+}
+
+.btn-is-wrong {
+  border-color: lightcoral;
+  background-color: red;
+  color: white;
+}
+
+.is-red {
+  background-color: red;
+  color: white;
+}
+
+.is-grey {
+  background-color: grey;
+  color: white;
+}
+
+.is-green {
   background-color: green;
   color: white;
 }
