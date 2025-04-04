@@ -1,33 +1,46 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
+import { useEffect, useState } from 'react';
+import { fetchAllCategories } from './service/category-service';
+
+const DIFFICULTY_OPTIONS = [
+  {id: 1, value: 'easy', name: 'Easy'},
+  {id: 2, value: 'medium', name: 'Medium'},
+  {id: 3, value: 'hard', name: 'Hard'}
+];
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [categoryOptions, setCategoryOptions] = useState([]);
+
+  useEffect(() => {
+    async function fetch() {
+      const _categories = await fetchAllCategories();
+      setCategoryOptions(_categories);
+    }
+    fetch();
+  }, []);
 
   return (
-    <div className='main-layout'>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div>
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p>
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
+    <main className='main-layout'>
+      <h1>QUIZ MAKER</h1>
+      <form>
+        <fieldset role='group'>
+          <select id='categorySelect' name='categories' required>
+            <option value=''>Select a category</option>
+            {categoryOptions.length > 0 && categoryOptions.map(category => {
+              return <option key={category.id} value={category}>{category.name}</option>
+            })}
+          </select>
+
+          <select id='difficultySelect' name='difficulties' required>
+            <option value=''>Select difficulty</option>
+            {DIFFICULTY_OPTIONS.map(difficulty => {
+              return <option key={difficulty.id} value={difficulty.value}>{difficulty.name}</option>
+            })}
+          </select>
+
+          <button id='createBtn' type='submit'>Create</button>
+        </fieldset>
+      </form>
+    </main>
   );
 }
 
