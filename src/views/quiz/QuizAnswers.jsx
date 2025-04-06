@@ -42,10 +42,7 @@ export default function QuizAnswers({ triviaQuestions, setTriviaQuestions }) {
   const navigate = useNavigate();
 
   function allQuestionsAnswered() {
-    const areAllQuestionsAnswered = !triviaQuestions.some(question => {
-      return !question.answers.some(answer => answer.isSelected);
-    });
-    return areAllQuestionsAnswered;
+    return !triviaQuestions.some(question => !question.answers.some(answer => answer.isSelected));
   };
 
   function handleOnSubmit() {
