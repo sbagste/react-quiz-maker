@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { fetchAllCategories } from '@service/categoryService';
-import { fetchTriviaByCategoryAndDifficultyAndAmount } from '@service/openTriviaService';
+import useCategoryOptions from './hooks/useCategoryOptions';
+import useCreateQuiz from './hooks/useCreateQuiz';
 
 const DIFFICULTY_OPTIONS = [
   {id: 1, value: 'easy', name: 'Easy'},
@@ -10,22 +9,8 @@ const DIFFICULTY_OPTIONS = [
 ];
 
 export default function QuizCreation({ setTriviaQuestions }) {
-  const [categoryOptions, setCategoryOptions] = useState([]);
-
-  useEffect(() => {
-    async function fetch() {
-      const _categories = await fetchAllCategories();
-      setCategoryOptions(_categories);
-    }
-    fetch();
-  }, []);
-
-  async function handleSubmit(event) {
-    event.preventDefault();
-    const data = new FormData(event.target);
-    const _triviaQuestions = await fetchTriviaByCategoryAndDifficultyAndAmount(data.get('categories'), data.get('difficulties'), 5);
-    setTriviaQuestions(_triviaQuestions);
-  };
+  const categoryOptions = useCategoryOptions();
+  const handleSubmit = useCreateQuiz(setTriviaQuestions);
 
   return (
     <form onSubmit={handleSubmit}>
