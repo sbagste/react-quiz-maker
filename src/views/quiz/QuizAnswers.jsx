@@ -1,32 +1,6 @@
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router';
-import { decode } from 'html-entities';
-
-function Question({ triviaQuestion, toggleAnswer }) {
-  return (
-    <div className='container'>
-      <p>{decode(triviaQuestion.question)}</p>
-      <div>
-        {
-          triviaQuestion.answers.map(answer => {
-            return <input
-              key={answer.id}
-              type='button'
-              className={`btn-answer ${answer.isSelected ? 'btn-is-selected' : ''}`}
-              value={decode(answer.value)}
-              onClick={() => toggleAnswer(triviaQuestion.id, answer.id, !answer.isSelected)}
-            />;
-          })
-        }
-      </div>
-    </div>
-  );
-};
-
-Question.propTypes = {
-  triviaQuestion: PropTypes.array,
-  toggleAnswer: PropTypes.func
-};
+import TriviaQuestion from '@components/TriviaQuestion';
 
 export default function QuizAnswers({ triviaQuestions, toggleAnswer }) {
   const navigate = useNavigate();
@@ -44,7 +18,14 @@ export default function QuizAnswers({ triviaQuestions, toggleAnswer }) {
   return (
     <form onSubmit={handleOnSubmit}>
       {
-        triviaQuestions.map(triviaQuestion => <Question key={triviaQuestion.id} triviaQuestion={triviaQuestion} toggleAnswer={toggleAnswer} />)
+        triviaQuestions.map(triviaQuestion => (
+          <TriviaQuestion
+            key={triviaQuestion.id}
+            triviaQuestion={triviaQuestion}
+            style={(answer) => ['btn-answer', { 'btn-is-selected': answer.isSelected }]}
+            onClick={(triviaQuestion, answer) => toggleAnswer(triviaQuestion.id, answer.id, !answer.isSelected)}
+          />
+        ))
       }
       {
         allQuestionsAnswered() && <button id='submitBtn' type='submit'>Submit</button>
