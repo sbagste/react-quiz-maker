@@ -2,17 +2,7 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router';
 import { decode } from 'html-entities';
 
-function Question({ triviaQuestion, setTriviaQuestions }) {
-  function handleOnClick(questionId, answerId, isSelected) {
-    setTriviaQuestions(prevState => {
-      const _state = [...prevState];
-      _state[_state.findIndex(s => s.id === questionId)].answers = _state[_state.findIndex(s => s.id === questionId)].answers.map(answer => {
-        return answer.id === answerId ? { ...answer, isSelected } : { ...answer, isSelected: false };
-      });
-      return _state;
-    });
-  };
-
+function Question({ triviaQuestion, toggleAnswer }) {
   return (
     <div className='container'>
       <p>{decode(triviaQuestion.question)}</p>
@@ -24,7 +14,7 @@ function Question({ triviaQuestion, setTriviaQuestions }) {
               type='button'
               className={`btn-answer ${answer.isSelected ? 'btn-is-selected' : ''}`}
               value={decode(answer.value)}
-              onClick={() => handleOnClick(triviaQuestion.id, answer.id, !answer.isSelected)}
+              onClick={() => toggleAnswer(triviaQuestion.id, answer.id, !answer.isSelected)}
             />;
           })
         }
@@ -35,10 +25,10 @@ function Question({ triviaQuestion, setTriviaQuestions }) {
 
 Question.propTypes = {
   triviaQuestion: PropTypes.array,
-  setTriviaQuestions: PropTypes.func
+  dispatch: PropTypes.func
 };
 
-export default function QuizAnswers({ triviaQuestions, setTriviaQuestions }) {
+export default function QuizAnswers({ triviaQuestions, toggleAnswer }) {
   const navigate = useNavigate();
 
   function allQuestionsAnswered() {
@@ -49,12 +39,12 @@ export default function QuizAnswers({ triviaQuestions, setTriviaQuestions }) {
     navigate('/results', { state: triviaQuestions });
   };
 
-  if (triviaQuestions.length === 0) return null;
+  if (!triviaQuestions || triviaQuestions.length === 0) return null;
 
   return (
     <form onSubmit={handleOnSubmit}>
       {
-        triviaQuestions.map(triviaQuestion => <Question key={triviaQuestion.id} triviaQuestion={triviaQuestion} setTriviaQuestions={setTriviaQuestions} />)
+        triviaQuestions.map(triviaQuestion => <Question key={triviaQuestion.id} triviaQuestion={triviaQuestion} toggleAnswer={toggleAnswer} />)
       }
       {
         allQuestionsAnswered() && <button id='submitBtn' type='submit'>Submit</button>
@@ -65,5 +55,5 @@ export default function QuizAnswers({ triviaQuestions, setTriviaQuestions }) {
 
 QuizAnswers.propTypes = {
   triviaQuestion: PropTypes.array,
-  setTriviaQuestions: PropTypes.func
+  toggleAnswer: PropTypes.func
 };

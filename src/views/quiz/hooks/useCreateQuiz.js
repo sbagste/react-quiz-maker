@@ -9,7 +9,7 @@ export default function useCreateQuiz(setTriviaQuestions) {
   return async function (event) {
     event.preventDefault();
     const data = new FormData(event.target);
-    const _triviaQuestions = await fetchTriviaByCategoryAndDifficultyAndAmount(data.get('categories'), data.get('difficulties'), 5);
-    setTriviaQuestions(_triviaQuestions);
+    const triviaQuestions = await fetchTriviaByCategoryAndDifficultyAndAmount(data.get('categories'), data.get('difficulties'), 5);
+    setTriviaQuestions(triviaQuestions);
   };
 };
