@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { fetchAllCategories } from '@service/category-service';
-import { fetchTriviaByCategoryAndDifficultyAndAmount } from '@service/open-trivia-service';
+import { fetchAllCategories } from '@service/categoryService';
+import { fetchTriviaByCategoryAndDifficultyAndAmount } from '@service/openTriviaService';
 
 const DIFFICULTY_OPTIONS = [
   {id: 1, value: 'easy', name: 'Easy'},
