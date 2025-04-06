@@ -1,4 +1,4 @@
-import { fetchTriviaByCategoryAndDifficultyAndAmount } from '@service/openTriviaService';
+import { fetchTriviaByCategoryAndDifficultyAndAmount } from '@services/openTriviaService';
 
 /**
  * returns function handling quiz creation

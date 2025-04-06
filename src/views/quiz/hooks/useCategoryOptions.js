@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { fetchAllCategories } from '@service/categoryService';
+import { fetchAllCategories } from '@services/categoryService';
 
 /**
  * returns list of available categories
