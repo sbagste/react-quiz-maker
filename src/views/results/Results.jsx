@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router';
+import { Link } from 'react-router';
 import PropTypes from 'prop-types';
 import { decode } from 'html-entities';
+import useResults from './hooks/useResults';
 
 function Question({ triviaQuestion }) {
   return (
@@ -27,31 +27,8 @@ Question.propTypes = {
   triviaQuestion: PropTypes.array
 };
 
-const COLOR_CLASS_BY_SCORE = {
-  0: 'is-red',
-  1: 'is-red',
-  2: 'is-grey',
-  3: 'is-grey',
-  4: 'is-green',
-  5: 'is-green'
-};
-
 export default function Results() {
-  const { state } = useLocation();
-  const [triviaQuestions, setTriviaQuestions] = useState([]);
-  const [score, setScore] = useState(0);
-  const [resultColor, setResultColor] = useState('');
-
-  useEffect(() => {
-    if (state) {
-      setTriviaQuestions(state);
-      const _score = state.reduce((acc, question) => {
-        return acc + question.answers.some(answer => answer.isSelected && answer.isCorrect);
-      }, 0);
-      setScore(_score);
-      setResultColor(COLOR_CLASS_BY_SCORE[_score]);
-    };
-  }, [state]);
+  const { triviaQuestions, score, resultColor } = useResults();
 
   return (
     <main className='container'>
