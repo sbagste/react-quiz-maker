@@ -29,7 +29,9 @@ export default function Results() {
         You scored {score} out of {triviaQuestions.length}
       </article>
 
-      <Link to='/'><button id='newQuizBtn' type='button' className='outline full-width'>Create a new quiz</button></Link>
+      <Link to='/'>
+        <button id='newQuizBtn' type='button' className='outline full-width'>Create a new quiz</button>
+      </Link>
     </main>
   );
 };

@@ -1,22 +1,16 @@
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router';
+import { Link } from 'react-router';
 import TriviaQuestion from '@components/TriviaQuestion';
 
 export default function QuizAnswers({ triviaQuestions, toggleAnswer }) {
-  const navigate = useNavigate();
-
   function allQuestionsAnswered() {
     return !triviaQuestions.some(question => !question.answers.some(answer => answer.isSelected));
-  };
-
-  function handleOnSubmit() {
-    navigate('/results', { state: triviaQuestions });
   };
 
   if (!triviaQuestions || triviaQuestions.length === 0) return null;
 
   return (
-    <form onSubmit={handleOnSubmit}>
+    <form>
       {
         triviaQuestions.map(triviaQuestion => (
           <TriviaQuestion
@@ -28,7 +22,14 @@ export default function QuizAnswers({ triviaQuestions, toggleAnswer }) {
         ))
       }
       {
-        allQuestionsAnswered() && <button id='submitBtn' type='submit'>Submit</button>
+        allQuestionsAnswered() &&
+        <Link to={{
+          pathname: '/results'
+        }}
+        state={triviaQuestions}
+        >
+          <button id='submitBtn' type='submit'>Submit</button>
+        </Link>
       }
     </form>
   );
