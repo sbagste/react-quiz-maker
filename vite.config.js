@@ -7,9 +7,10 @@ export default defineConfig({
   base:'/react-quiz-maker/',
   resolve: {
     alias: {
-      '@views': path.resolve(__dirname, './src/views'),
+      '@components': path.resolve(__dirname, './src/components'),
       '@reducers': path.resolve(__dirname, './src/reducers'),
-      '@services': path.resolve(__dirname, './src/services')
+      '@services': path.resolve(__dirname, './src/services'),
+      '@views': path.resolve(__dirname, './src/views')
     },
   },
 });

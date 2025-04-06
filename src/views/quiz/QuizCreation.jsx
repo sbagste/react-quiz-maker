@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import Select from '@components/Select';
 import useCategoryOptions from './hooks/useCategoryOptions';
 import useCreateQuiz from './hooks/useCreateQuiz';
 
@@ -15,21 +16,21 @@ export default function QuizCreation({ setTriviaQuestions }) {
   return (
     <form onSubmit={handleSubmit}>
       <fieldset role='group'>
-        <select id='categorySelect' name='categories' defaultValue='' required>
-          <option value='' disabled>Select a category</option>
-          {
-            categoryOptions.length > 0 && categoryOptions.map(category => {
-              return <option key={category.id} value={category.id}>{category.name}</option>
-            })
-          }
-        </select>
+        <Select
+          id='categorySelect'
+          name='categories'
+          customPlaceholder='Select a category'
+          options={categoryOptions}
+          required
+        />
 
-        <select id='difficultySelect' name='difficulties' defaultValue='' required>
-          <option value='' disabled>Select difficulty</option>
-          {DIFFICULTY_OPTIONS.map(difficulty => {
-            return <option key={difficulty.id} value={difficulty.value}>{difficulty.name}</option>
-          })}
-        </select>
+        <Select
+          id='difficultySelect'
+          name='difficulties'
+          customPlaceholder='Select difficulty'
+          options={DIFFICULTY_OPTIONS}
+          required
+        />
 
         <button id='createBtn' type='submit'>Create</button>
       </fieldset>
