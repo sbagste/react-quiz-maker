@@ -1,8 +1,16 @@
 @use '@picocss/pico/scss';
 
-.main-layout {
-  margin-right: 50px;
-  margin-left: 50px;
+body {
+  max-width: 800px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+main {
+  min-width: 320px;
+  min-height: 100vh;
 }
 
 .full-width {
