@@ -1,5 +1,6 @@
 import { Link } from 'react-router';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import { decode } from 'html-entities';
 import useResults from './hooks/useResults';
 
@@ -13,7 +14,10 @@ function Question({ triviaQuestion }) {
             return <input
               key={answer.id}
               type='button'
-              className={`btn-answer btn-no-hover ${answer.isCorrect ? 'btn-is-selected' : answer.isSelected && !answer.isCorrect ? 'btn-is-wrong' : ''}`}
+              className={classnames('btn-answer btn-no-hover', {
+                'btn-is-selected': answer.isCorrect,
+                'btn-is-wrong': answer.isSelected && !answer.isCorrect
+              })}
               value={decode(answer.value)}
             />;
           })
