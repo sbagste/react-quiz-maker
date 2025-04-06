@@ -25,7 +25,7 @@ function Question({ triviaQuestion, toggleAnswer }) {
 
 Question.propTypes = {
   triviaQuestion: PropTypes.array,
-  dispatch: PropTypes.func
+  toggleAnswer: PropTypes.func
 };
 
 export default function QuizAnswers({ triviaQuestions, toggleAnswer }) {
