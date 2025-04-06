@@ -54,7 +54,7 @@ export default function Results() {
   }, [state]);
 
   return (
-    <main>
+    <main className='container'>
       <h1>RESULTS</h1>
       
       <div>

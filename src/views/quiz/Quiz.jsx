@@ -6,7 +6,7 @@ export default function Quiz() {
   const [triviaQuestions, setTriviaQuestions] = useState([]);
 
   return (
-    <main>
+    <main className='container'>
       <h1>QUIZ MAKER</h1>
       <QuizCreation setTriviaQuestions={setTriviaQuestions} />
       <QuizAnswers triviaQuestions={triviaQuestions} setTriviaQuestions={setTriviaQuestions} />
