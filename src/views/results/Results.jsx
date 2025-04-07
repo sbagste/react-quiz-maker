@@ -1,5 +1,4 @@
 import { Link } from 'react-router';
-import PropTypes from 'prop-types';
 import TriviaQuestion from '@components/TriviaQuestion';
 import useResults from './hooks/useResults';
 
