@@ -23,11 +23,7 @@ export default function QuizAnswers({ triviaQuestions, toggleAnswer }) {
       }
       {
         allQuestionsAnswered() &&
-        <Link to={{
-          pathname: '/results'
-        }}
-        state={triviaQuestions}
-        >
+        <Link to={{ pathname: '/results' }} state={triviaQuestions}>
           <button id='submitBtn' type='submit'>Submit</button>
         </Link>
       }
