@@ -21,7 +21,7 @@ function mapAnswers(question) {
       isCorrect: true,
       order: Math.random()
     }])
-    .sort((a, b) => a.order - b.order)
+    .sort((a, b) => a.order - b.order) // answers order should be in a random order
     .map((answer, index) => ({
       id: index + 1, // no 0 index
       value: answer.value,
